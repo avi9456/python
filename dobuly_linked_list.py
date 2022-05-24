@@ -1,3 +1,6 @@
+from ast import Not
+
+
 class node:
     def __init__(self,val):
         self.pre=None
@@ -26,6 +29,38 @@ class DLL:
         tmp.next=NN
         NN.pre=tmp
         print(f"{NN.data} is inserted at end")
+    def insert_after(self,nod,data,pos):
+        NN=node(data)
+        if self.head is None:
+            self.head=NN
+        else:
+            p=1
+            while nod:
+                pre=nod
+                nod=nod.next
+                p=p+1
+                if p==pos:
+                    break
+            pre.next=NN
+            NN.pre=pre
+            NN.next=nod
+    def deletafter(self,key):
+        temp=self.head
+        if self.head is None:
+            print("list is empty")
+        else:
+            if temp.data==key:
+                self.head=temp.next
+                self.head.pre=None
+                temp=None
+                return
+            while temp is not None:
+                if temp.data==key:
+                    temp.next.pre=temp.pre
+                    temp.pre.next=temp.next
+                    temp=None
+                else:
+                    temp=temp.next
     def del_beg(self):
         if self.head is None:
             print("list is empty")
@@ -60,6 +95,7 @@ dlist.insert_beg(4)
 dlist.insert_beg(3)
 dlist.insert_beg(2)
 dlist.insert_beg(1)
+dlist.insert_after(dlist.head,30,2)
 dlist.printDLL(dlist.head)
 print()
 dlist.del_beg()
@@ -71,4 +107,5 @@ dlist.insert_end(9)
 dlist.insert_end(0)
 dlist.del_end()
 dlist.del_end()
+dlist.deletafter(4)
 dlist.printDLL(dlist.head)
