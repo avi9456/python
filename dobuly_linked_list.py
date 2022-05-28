@@ -44,6 +44,7 @@ class DLL:
             pre.next=NN
             NN.pre=pre
             NN.next=nod
+            print(f"{data} is inserted at {pos}")
     def deletafter(self,key):
         temp=self.head
         if self.head is None:
@@ -66,8 +67,11 @@ class DLL:
             print("list is empty")
         else:
             tmp=self.head
-            self.head=self.head.next
-            self.head.pre=None
+            if self.head.next is None:
+                self.head=None
+            else:
+                self.head=self.head.next
+                self.head.pre=None
             print(f"{tmp.data} is deleted")
     def del_end(self):
         if self.head is None:
